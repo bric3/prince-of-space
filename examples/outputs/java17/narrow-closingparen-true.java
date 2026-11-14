@@ -99,6 +99,9 @@ public class FormatterShowcase
     }
 
     // Scenario 7: Lambda expressions
+    private final java.util.function.Function<String, String> annotatedFieldLambda =
+            (@org.jspecify.annotations.Nullable var value) -> value;
+
     public void processWithCallbacks() {
         items.forEach(item -> System.out.println(item));
 
@@ -199,6 +202,8 @@ public class FormatterShowcase
     }
 
     // Scenario 13: Annotation placement (including JSpecify type-use)
+    @Deprecated
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public @org.jspecify.annotations.Nullable String findItem(String query) {
         return items
             .stream()
@@ -211,6 +216,14 @@ public class FormatterShowcase
     @SuppressWarnings("unchecked")
     public int compareTo(FormatterShowcase other) {
         return this.legacyField.compareTo(other.legacyField);
+    }
+
+    public static @Deprecated String annotationBetweenModifiers() {
+        return "legacy";
+    }
+
+    public @Deprecated String annotationOnFollowingLine() {
+        return legacyField;
     }
 
     // Scenario 14: Array initializers
@@ -797,6 +810,7 @@ public class FormatterShowcase
             // Closing-array comment remains inside the annotation value
     }) /* shelf */
     @SuppressWarnings({"deprecation", "unchecked", "rawtypes", "unused"}) // Warning categories.
+
     public void scenario57AnnotatedMethodWithBuckets() {}
 
     // Scenario 58: Nested array initializers with line and block comments between elements
